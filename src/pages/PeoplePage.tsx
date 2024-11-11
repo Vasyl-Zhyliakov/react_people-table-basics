@@ -34,11 +34,11 @@ export const People = () => {
             </p>
           )}
 
-          {people.length === 0 && (
+          {people.length === 0 && !loading && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
-          
-          <PeopleTable people={people}/>
+
+          <PeopleTable people={people} />
         </div>
       </div>
     </>

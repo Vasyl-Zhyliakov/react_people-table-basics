@@ -10,20 +10,20 @@ type Props = {
 export const PersonForTable: React.FC<Props> = ({ person, people }) => {
   const { personSlug } = useParams();
   const selectedPerson = personSlug ? personSlug : '';
+
   function findParentLink(name: string | null) {
     if (name === null) {
       return '-';
     }
-    const parent = people.find(person => person.name === name);
+
+    const parent = people.find(p => p.name === name);
 
     return parent?.slug;
   }
 
-  // "#/people/jan-van-brussel-1714"
   return (
     <tr
       data-cy="person"
-      key={person.slug}
       className={classNames({
         'has-background-warning': selectedPerson === person.slug,
       })}
