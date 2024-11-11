@@ -18,7 +18,17 @@ export const PersonForTable: React.FC<Props> = ({ person, people }) => {
 
     const parent = people.find(p => p.name === name);
 
-    return parent?.slug;
+    if (parent && parent.sex === 'f') {
+      return <Link to={`../${parent.slug}`} className="has-text-danger">
+        {parent.name}
+      </Link>;
+    }
+
+    if (parent && parent.sex === 'm') {
+      return <Link to={`../${parent.slug}`}>{parent.name}</Link>;
+    }
+
+    return name;
   }
 
   return (
@@ -40,29 +50,8 @@ export const PersonForTable: React.FC<Props> = ({ person, people }) => {
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td>
-        {' '}
-        {findParentLink(person.motherName) ? (
-          <Link
-            to={`../${findParentLink(person.motherName)}`}
-            className="has-text-danger"
-          >
-            {person.motherName}
-          </Link>
-        ) : (
-          person.motherName
-        )}
-      </td>
-
-      <td>
-        {findParentLink(person.fatherName) ? (
-          <Link to={`../${findParentLink(person.fatherName)}`}>
-            {person.fatherName}
-          </Link>
-        ) : (
-          person.fatherName
-        )}
-      </td>
+      <td>{findParentLink(person.motherName)}</td>
+      <td>{findParentLink(person.fatherName)}</td>
     </tr>
   );
 };
